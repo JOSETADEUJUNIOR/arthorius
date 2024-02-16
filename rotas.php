@@ -47,6 +47,17 @@ try {
         SimpleRouter::get(URL_ADMIN . 'usuarios/deletar/{id}', 'AdminUsuarios@deletar');
         SimpleRouter::post(URL_ADMIN . 'usuarios/datatable', 'AdminUsuarios@datatable');
 
+        //CLIENTES
+        SimpleRouter::get(URL_ADMIN . 'clientes/listar', 'AdminClientes@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'clientes/cadastrar', 'AdminClientes@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'clientes/editar/{id}', 'AdminClientes@editar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'clientes/historicoAluguel', 'AdminClientes@historicoAluguel');
+        SimpleRouter::get(URL_ADMIN . 'clientes/deletar/{id}', 'AdminClientes@deletar');
+        
+        //ADMIN CONFIGURAÇÔES
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'configuracao/listar', 'AdminConfiguracao@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'configuracao/editar/{id}', 'AdminConfiguracao@editar');
+
         //ADMIN POSTS
         SimpleRouter::get(URL_ADMIN . 'posts/listar', 'AdminPosts@listar');
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'posts/cadastrar', 'AdminPosts@cadastrar');

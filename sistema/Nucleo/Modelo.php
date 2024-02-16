@@ -28,7 +28,7 @@ abstract class Modelo
      * Construtor da classe
      * @param string $tabela
      */
-    public function __construct(string $tabela, string $schema = 'tenant_2')
+    public function __construct(string $tabela, string $schema = 'posts')
     {
         $this->tabela = $tabela;
         $this->mensagem = new Mensagem();

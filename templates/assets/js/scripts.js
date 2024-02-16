@@ -11,10 +11,10 @@ $(document).ready(function () {
 
     $('.formularioAjax').submit(function (event) {
         event.preventDefault();
-
         var carregando = $('.ajaxLoading');
         var botao = $(':input[type="submit"]');
-
+        var url = $(this).attr('action');
+        var formulario = $(this);
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),
@@ -25,11 +25,19 @@ $(document).ready(function () {
             beforeSend: function () {
                 carregando.show().fadeIn(200);
                 botao.prop('disable', false).addClass('disabled');
+              // Remover a classe 'is-invalid' de todos os campos antes de enviar o formulário
+              formulario.find('.is-invalid').removeClass('is-invalid');
             },
             success: function (retorno) {
 
                 if (retorno.erro) {
                     alerta(retorno.erro, 'yellow');
+                    console.log(retorno.erro);
+                    // Se a mensagem de erro indicar campos obrigatórios
+                    if (retorno.erro.includes('preencha os campos obrigatórios')) {
+                        // Adicione a classe 'is-invalid' aos campos obrigatórios
+                        formulario.find('.obg').addClass('is-invalid');
+                    }
                 }
                 if (retorno.successo) {
                     $('.formularioAjax')[0].reset();
@@ -65,3 +73,4 @@ function alerta(mensagem, cor) {
         showCountdown: true
     });
 }
+

@@ -9,7 +9,7 @@
             </a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-            Posts
+            Equipamentos
         </li>
     </ol>
 </nav>
@@ -52,16 +52,39 @@
                         <th>Capa</th>
                         <th class="text-center">Título</th>
                         <th>Categoria</th>
+                        <th>Valor Locação</th>
+                        <th>Valor Patrimônio</th>
                         <th>Visitas</th>
                         <th>Status</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
-
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="info{{post.id}}">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{post.titulo}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Cadastrado em: {{ post.cadastrado_em|date("d/m/Y H:i:s") }}
+                            </li>
+                            <li class="list-group-item">
+                                Atualizado em: {{post.atualizado_em|date("d/m/Y H:i:s")}}
+                            </li>
+                            <li class="list-group-item">
+                                Última visita em: {{post.ultima_visita_em|date("d/m/Y H:i:s")}}
+                            </li>
+                            <li class="list-group-item">
+                                Cadastrado por: <b>{{post.usuario.nome}}</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </table>
 
         </div>     
-
+        
 
     </div>
 </div>

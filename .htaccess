@@ -5,7 +5,7 @@ Options -indexes
 RewriteEngine On
 
 #Define a url base
-RewriteBase /posts
+RewriteBase /arthorius
 
 #Define a condição sob a qual a reescrita ocorrera
 RewriteCond %{SCRIPT_FILENAME} !-f

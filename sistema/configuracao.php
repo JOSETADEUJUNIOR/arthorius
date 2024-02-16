@@ -14,7 +14,7 @@ define('SITE_DESCRICAO', 'ARTHORIUS - Tecnologias');
 
 //urls do sistema
 define('URL_PRODUCAO', 'https://unset.com.br');
-define('URL_DESENVOLVIMENTO', 'http://localhost/posts');
+define('URL_DESENVOLVIMENTO', 'http://localhost/arthorius');
 
 if (Helpers::localhost()) {
     //dados de acesso ao banco de dados
@@ -24,8 +24,8 @@ if (Helpers::localhost()) {
     define('DB_USUARIO', 'root');
     define('DB_SENHA', '');
     
-    define('URL_SITE', 'posts/');
-    define('URL_ADMIN', 'posts/admin/');
+    define('URL_SITE', 'arthorius/');
+    define('URL_ADMIN', 'arthorius/admin/');
 }else {
     //dados de acesso ao banco de dados na hospedagem
     define('DB_HOST', 'localhost');

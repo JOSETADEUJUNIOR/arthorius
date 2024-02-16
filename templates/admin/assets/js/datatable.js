@@ -46,11 +46,12 @@ $(document).ready(function () {
                     }
                 }
             },
-            null, null, null,
+            null, null, null, null,null,
             {
                 data: null,
                 render: function (data, type, row) {
-                    if (row[5] === 1) {
+                    console.log("status" + row[7]);
+                    if (row[7] == 1) {
                         return '<i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>';
                     } else {
                         return '<i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>';
@@ -60,14 +61,42 @@ $(document).ready(function () {
             {
                 data: null,
                 render: function (data, type, row) {
+                    console.log(row);
                     var html = '';
-
-                    html += ' <a href=" ' + url + 'admin/posts/editar/' + row[0] + ' " tooltip="tooltip" title="Editar"><i class="fa-solid fa-pen m-1"></i></a> ';
-
+                
+                    html += '<a href="#info' + row[0] + ' " data-bs-toggle="offcanvas" tooltip="tooltip" title="log"><i class="fa-solid fa-arrow-trend-up"></i></a> ';
+                
+                    html += '<a href=" ' + url + 'admin/posts/editar/' + row[0] + ' " tooltip="tooltip" title="Editar"><i class="fa-solid fa-pen m-1"></i></a> ';
+                
                     html += '<a href=" ' + url + 'admin/posts/deletar/' + row[0] + ' "><i class="fa-solid fa-trash m-1" tooltip="tooltip" title="Deletar"></i></a>';
-
+                
+                    html += '<div class="offcanvas offcanvas-start" tabindex="-1" id="info' + row[0] + '">'
+                    html += '<div class="offcanvas-header">'
+                    html += '<h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>'
+                    html += '<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>'
+                    html += '</div>'
+                    html += '<div class="offcanvas-body">'
+                    html += '<ul class="list-group list-group-flush">'
+                    html += '<h3>Registro de Log</h3>'
+                    html += '<li class="list-group-item">'
+                    html += 'Cadastrado à: ' + row[8]
+                    html += '</li>'
+                    html += '<li class="list-group-item">'
+                    html += 'Atualizado em: ' + row[3]
+                    html += '</li>'
+                    html += '<li class="list-group-item">'
+                    html += 'Última visita em: ' + row[4]
+                    html += '</li>'
+                    html += '<li class="list-group-item">'
+                    html += 'Cadastrado por: <b>' + row[5] + '</b>'
+                    html += '</li>'
+                    html += '</ul>'
+                    html += '</div>'
+                    html += '</div>'
+                
                     return html;
                 }
+                
             }
         ],
         columnDefs: [
@@ -86,7 +115,7 @@ $(document).ready(function () {
 
         ]
     });
-
+// Adicionar evento de clique para abrir o offcanvas
     //TABELA USUÁRIOS
     $('#tabelaUsuarios').DataTable({
         order: [[0, 'desc']],

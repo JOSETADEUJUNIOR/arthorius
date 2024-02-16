@@ -4,6 +4,7 @@ namespace sistema\Controlador\Admin;
 
 use sistema\Modelo\CategoriaModelo;
 use sistema\Nucleo\Helpers;
+use sistema\Modelo\PostModelo;
 
 /**
  * Classe AdminCategorias
@@ -20,7 +21,6 @@ class AdminCategorias extends AdminControlador
     public function listar(): void
     {
         $categorias = new CategoriaModelo();
-
         echo $this->template->renderizar('categorias/listar.html', [
             'categorias' => $categorias->busca()->ordem('titulo ASC')->resultado(true),
             'total' => [
@@ -50,10 +50,10 @@ class AdminCategorias extends AdminControlador
 
                 if ($categoria->salvar()) {
                     $this->mensagem->sucesso('Categoria cadastrada com sucesso')->flash();
-                    Helpers::redirecionar('admin/categorias/listar');
+                    Helpers::json('redirecionar', Helpers::url('admin/categorias/listar'));
                 } else {
                     $this->mensagem->erro($categoria->erro())->flash();
-                    Helpers::redirecionar('admin/categorias/listar');
+                    Helpers::json('redirecionar', Helpers::url('admin/categorias/listar'));
                 }
             }
         }
@@ -86,10 +86,10 @@ class AdminCategorias extends AdminControlador
 
                 if ($categoria->salvar()) {
                     $this->mensagem->sucesso('Categoria atualizada com sucesso')->flash();
-                    Helpers::redirecionar('admin/categorias/listar');
+                    Helpers::json('redirecionar', Helpers::url('admin/categorias/listar'));
                 } else {
                     $this->mensagem->erro($categoria->erro())->flash();
-                    Helpers::redirecionar('admin/categorias/listar');
+                    Helpers::json('redirecionar', Helpers::url('admin/categorias/listar'));
                 }
             }
         }
@@ -107,7 +107,7 @@ class AdminCategorias extends AdminControlador
     private function validarDados(array $dados): bool
     {
         if (empty($dados['titulo'])) {
-            $this->mensagem->alerta('Escreva um título para a Categoria!')->flash();
+            Helpers::json('erro', 'informe o titulo');
             return false;
         }
         return true;
@@ -122,12 +122,13 @@ class AdminCategorias extends AdminControlador
     {
         if (is_int($id)) {
             $categoria = (new CategoriaModelo())->buscaPorId($id);
+            $posts = (new PostModelo())->busca("categoria_id = {$categoria->id}")->resultado(true);
 
             if (!$categoria) {
                 $this->mensagem->alerta('O categoria que você está tentando deletar não existe!')->flash();
                 Helpers::redirecionar('admin/categorias/listar');
-            } elseif ($categoria->posts($categoria->id)) {
-                $this->mensagem->alerta("A categoria {$categoria->titulo} tem posts cadastrados, delete ou altere os posts antes de deletar!")->flash();
+            } elseif ($posts) {
+                $this->mensagem->alerta("A categoria {$categoria->titulo} tem {$categoria->totalPosts($categoria->id)} posts cadastrados, delete ou altere os posts antes de deletar!")->flash();
                 Helpers::redirecionar('admin/categorias/listar');
             } else {
                 if ($categoria->deletar()) {

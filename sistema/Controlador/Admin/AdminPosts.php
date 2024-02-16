@@ -32,8 +32,12 @@ class AdminPosts extends AdminControlador
             0 => 'id',
             2 => 'titulo',
             3 => 'categoria_id',
-            4 => 'visitas',
-            5 => 'status',
+            4 => 'valorLocacao',
+            5 => 'valorPatrimonio',
+            6 => 'visitas',
+            7 => 'status',
+            8 => 'cadastrado_em',
+            9 => 'usuario_id',
         ];
 
         $ordem = " " . $colunas[$datatable['order'][0]['column']] . " ";
@@ -58,8 +62,12 @@ class AdminPosts extends AdminControlador
                     $post->capa,
                     $post->titulo,
                     $post->categoria()->titulo ?? '-----',
+                    $post->valorLocacao,
+                    $post->valorPatrimonio,
                     Helpers::formatarNumero($post->visitas),
-                    $post->status
+                    $post->status,
+                    Helpers::contarTempo($post->cadastrado_em),
+                    $post->usuario_id
                 ];
             }
         }
@@ -106,6 +114,8 @@ class AdminPosts extends AdminControlador
                 $post->slug = Helpers::slug($dados['titulo']);
                 $post->titulo = $dados['titulo'];
                 $post->texto = $dados['texto'];
+                $post->valorLocacao     = $dados['valorLocacao'];                
+                $post->valorPatrimonio  = $dados['valorPatrimonio']; 
                 $post->status = $dados['status'];
                 $post->capa = $this->capa ?? null;
                 $post->capa_ativa = $dados['capa_ativa'];
@@ -147,6 +157,8 @@ class AdminPosts extends AdminControlador
                 $post->slug = Helpers::slug($dados['titulo']);
                 $post->titulo = $dados['titulo'];
                 $post->texto = $dados['texto'];
+                $post->valorLocacao     = $dados['valorLocacao'];                
+                $post->valorPatrimonio  = $dados['valorPatrimonio'];  
                 $post->status = $dados['status'];
                 $post->atualizado_em = date('Y-m-d H:i:s');
                 $post->capa_ativa = $dados['capa_ativa'];
@@ -193,6 +205,10 @@ class AdminPosts extends AdminControlador
 
         if (empty($dados['titulo'])) {
             $this->mensagem->alerta('Escreva um título para o Post!')->flash();
+            return false;
+        }
+        if (empty($dados['valorLocacao'])) {
+            $this->mensagem->alerta('Digite um valor para locação!')->flash();
             return false;
         }
         if (empty($dados['texto'])) {

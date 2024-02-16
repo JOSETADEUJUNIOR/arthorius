@@ -11,14 +11,20 @@
     <div class="sidebarMenu">
         <ul>
             <li class="sidebarTitulo">
-                Administração
+                Cadastros
             </li>
             <li>
-                <a href="{{url('admin/posts/listar')}}" tooltip="tooltip" title="Administração de Posts">
-                    <i class="fa-solid fa-file-pen"></i>
-                    <span>Posts</span>
+                <a href="#" tooltip="tooltip" title="Gestão de clientes">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Clientes</span>
                 </a>
-            </li>  
+                <ul class="submenu">
+                    <li><a href="{{url('admin/clientes/cadastrar')}}"><i class="fas fa-plus"></i>Cadastrar</a></li>
+                    <li><a href="{{url('admin/clientes/listar')}}"><i class="fas fa-list"></i>Listar</a></li>
+                    <li><a href="{{url('admin/clientes/historicoAluguel')}}"><i class="fas fa-folder-open"></i>Histórico de aluguel</a></li>
+                    <!-- Adicione mais opções conforme necessário -->
+                </ul>
+            </li>
             <li>
                 <a href="{{url('admin/categorias/listar')}}" tooltip="tooltip" title="Administração de Categorias">
                     <i class="fa-solid fa-list"></i>
@@ -26,12 +32,63 @@
                 </a>
             </li> 
             <li>
-                <a href="{{url('admin/usuarios/listar')}}" tooltip="tooltip" title="Administração de Usuários">
-                    <i class="fas fa-users"></i> 
-                    <span>Usuários</span>
+                <a href="#" tooltip="tooltip" title="Gestão de ativos">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Patrimônio</span>
                 </a>
+                <ul class="submenu">
+                    <li><a href="{{url('admin/posts/listar')}}">Listar Equipamentos/Veículos</a></li>
+                    <li><a href="{{url('admin/posts/cadastrar')}}">Cadastrar Equipamento/Veículo</a></li>
+                    <!-- Adicione mais opções conforme necessário -->
+                </ul>
+            </li>  
+            <li>
+                <a href="#" tooltip="tooltip" title="Gestão de ativos">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Locações</span>
+                </a>
+                <ul class="submenu">
+                    <li><a href="{{url('admin/aluguel/listar')}}">Listar locados</a></li>
+                    <li><a href="{{url('admin/aluguel/cadastrar')}}">Cadastrar locação</a></li>
+                    <li><a href="{{url('admin/aluguel/equipamentoAlocado')}}">Equipamentos/Veículos alocados</a></li>
+                    <!-- Adicione mais opções conforme necessário -->
+                </ul>
+            </li>  
+            <li class="sidebarTitulo">
+                Configurações gerais
             </li>
-        </ul>
+            <li>
+                <a href="#" tooltip="tooltip" title="Configurações do sistema">
+                    <i class="fa-solid fa-cogs"></i>
+                    <span>Configurações</span>
+                </a>
+                <ul class="submenu">
+                    <li><a href="{{url('admin/configuracao/listar')}}"><i class="fas fa-cog"></i>Configurações gerais</a></li>
+                    <li><a href="{{url('admin/usuarios/listar')}}"><i class="fas fa-users"></i>Configurações de usuários</a></li>
+                   
+                    <!-- Adicione mais opções conforme necessário -->
+                </ul>
+            </li>
+           <!--  <li class="sidebarTitulo" id="configuracoes">
+                <i class="fa-solid fa-cogs"></i>
+                <span>Configurações gerais</span>
+                <ul class="submenu">
+                    <li>
+                        <a href="{{url('admin/configuracao/listar')}}" tooltip="tooltip" title="Administração de Usuários">
+                            <i class="fas fa-users"></i> 
+                            <span>Configurações da empresa</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('admin/configuracao/usuarios')}}" tooltip="tooltip" title="Administração de Usuários">
+                            <i class="fas fa-users"></i> 
+                            <span>Configurações de usuários</span>
+                        </a>
+                    </li>
+                    <!-- Adicione mais itens de submenu conforme necessário -->
+                  <!-- </ul>
+            </li> -->
+         </ul>
     </div>
     
 </div>

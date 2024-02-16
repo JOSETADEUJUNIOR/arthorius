@@ -326,6 +326,13 @@ class Helpers
         return $saudacao;
     }
 
+
+    public static function formatarDataParaBanco($data) {
+        // Converte o formato da data de dd-mm-yyyy para yyyy-mm-dd
+        $dataFormatada = date('Y-m-d', strtotime($data));
+        return $dataFormatada;
+    }
+
 /**
  * Resume um texto para um limite de caracteres.
  *

@@ -10,7 +10,7 @@
         </li>
         <li class="breadcrumb-item">
             <a href="{{url('admin/posts/listar')}}">
-                Posts
+                Equipamento
             </a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -27,6 +27,10 @@
             action="{% if post.id %}{{url('admin/posts/editar/'~post.id)}}{%else%}{{url('admin/posts/cadastrar')}}{%endif%}"
             method="post" enctype="multipart/form-data">
             <div class="row">
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Descrição do equipamento</label>
+                    <input type="text" name="titulo" id="titulo" value="{{post.titulo}}" class="form-control">
+                </div>
                 <div class="col-md-9">
                     <div class="mb-3">
                         <label for="capa" class="form-label">Capa</label>
@@ -47,18 +51,8 @@
                 <label for="capa" class="form-label">Vídeo</label>
                 <input class="form-control" type="file" id="video" name="video" accept=".mp4">
             </div>
-
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Título</label>
-                <input type="text" name="titulo" id="titulo" value="{{post.titulo}}" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="texto" class="form-label">Texto</label>
-                <textarea name="texto" class="form-control ckeditor" rows="3">{{post.texto}}</textarea>
-            </div>
-
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <div class="mb-3">
                         <label for="categoria_id" class="form-label">Categoria</label>
                         <select class="form-select" name="categoria_id" id="categoria_id">
@@ -69,7 +63,19 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="valorLocacao" class="form-label">Valor Locação</label>
+                        <input type="text" name="valorLocacao" value="{{post.valorLocacao}}" class="form-control money">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="valorPatrimonio" class="form-label">Valor Patrimônio</label>
+                        <input type="text" name="valorPatrimonio" id="valorPatrimonio" value="{{post.valorPatrimonio}}" class="form-control money">
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select class="form-select" name="status">
@@ -79,6 +85,12 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-3">
+                <label for="texto" class="form-label">Texto</label>
+                <textarea name="texto" class="form-control ckeditor" rows="3">{{post.texto}}</textarea>
+            </div>
+
+
 
             <div class="d-grid">
                 <input type="submit" class="btn btn-dark" value="{% if post.id %}Atualizar{%else%}Cadastrar{%endif%}">

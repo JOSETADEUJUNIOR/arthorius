@@ -21,7 +21,7 @@ class SiteControlador extends Controlador
      * Home Page
      * @return void
      */
-    public function index(string $slug = 'tenant_2'): void
+    public function index(string $slug = 'posts'): void
     {
         $slug = $slug;
         $posts = (new PostModelo($slug))->busca("status = 1");
